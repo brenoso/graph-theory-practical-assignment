@@ -31,14 +31,15 @@ class ListaAdj(object):
         saida += "}\n"
 
         # Impressão da lista de arestas
-        saida += "Vizinhança dos vértices \n"
+        saida += "Vizinhanca dos vertices \n"
         for v in self.__lista:
             saida += v._obtemNome() + ": "
             aux = v._obtemProximo()
-            while(aux._obtemProximo() != None):
+            if aux is not None:
+                while(aux._obtemProximo() != None):
+                    saida += aux._obtemNome() + "(" + str(aux._obtemPeso()) + ") "
+                    aux = aux._obtemProximo()
                 saida += aux._obtemNome() + "(" + str(aux._obtemPeso()) + ") "
-                aux = aux._obtemProximo()
-            saida += aux._obtemNome() + "(" + str(aux._obtemPeso()) + ") "
             saida += "\n"
             saida += "\n"
         return saida    
