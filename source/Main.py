@@ -1,21 +1,32 @@
 from Instancia import Instancia
 import os
 
-# ---------------------- Menus Definition---------------------- #
+# ---------------------- Definição dos Menus ---------------------- #
 def print_menu_arquivo():
-    print ("Digite o nome do arquivo a ser lido:")
+    print ("\nDigite o nome do arquivo a ser lido:")
 
-
-def print_menu_estrutura_dados():       ## Your menu design here
+def print_menu_estrutura_dados():
+    print (67 * "-")
     print ("Escolha uma Estrutura de Dados para representar o grafo")
     print ("1. M.A.")
     print ("2. M.I.")
     print ("3. L.A.")
-    print ("4. Sair")
-    print (67 * "-")
-# ---------------------- End Menus Definition ---------------------- #
+    print ("4. Sair\n")
 
-# Menu de leitura do arquivo
+def print_menu_geral():
+    print (67 * "-")
+    print ("\nSelecione a operacao para executar no grafo:")
+    print("1. Imprimir")
+    print ("2. ehVizinho")
+    print ("3. obtemVizinho")
+    print ("10. Sair\n")
+
+# Variáveis auxiliares para os menus
+sair = False
+loop = False
+
+# ---------------------- Menu de leitura do arquivo ---------------------- #
+
 loop=True      
   
 while loop:
@@ -26,54 +37,99 @@ while loop:
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
         for file in files:
-            if file == arquivo:
-                print("\nArquivo encontrado!\n")
+            if arquivo in file:
+                print("\nArquivo encontrado!")
                 path = os.path.join(root, file)
+                print("Caminho: " + path +"\n")
                 loop = False
+                break # Evita encontrar dois arquivos com o mesmo nome
     
     if path is None:
         print("\nArquivo nao encontrado!\n")
 
-# Menu de leitura do arquivo
+# ---------------------- Menu de Estrutura de Dados ---------------------- #
+
 loop=True
 
 while loop: 
 
     print_menu_estrutura_dados()
-    tipo_estrutura = input("Enter your choice [1-4]: ")
+    tipo_estrutura = input("Digite sua escolha [1-4]: ")
     tipo_estrutura = int(tipo_estrutura)
 
-    if tipo_estrutura==1:     
-        print ("Matriz de Adjacencia selecionada")
-        loop=False
+    def cria_grafo():
+        global grafo # Torna o grafo acessível fora desse contexto
+        grafo = Instancia(tipo_estrutura)
+        grafo = grafo._leArquivo(path)
+        print(grafo)
 
-    elif tipo_estrutura==2:
-        print ("Matriz de Incidencia selecionada")
-        loop=False
+    if tipo_estrutura == 1:     
+        print ("\nMatriz de Adjacencia selecionada!\n")
+        cria_grafo()
+        loop = False
 
-    elif tipo_estrutura==3:
-        print ("Lista de Adjacencia selecionada")
-        loop=False
+    elif tipo_estrutura == 2:
+        print ("\nMatriz de Incidencia selecionada!\n")
+        cria_grafo()
+        loop = False
 
-    elif tipo_estrutura==4:
-        print ("Menu 4 has been selected")
-        # loop = False
+    elif tipo_estrutura == 3:
+        print ("\nLista de Adjacencia selecionada!\n")
+        cria_grafo()
+        loop = False
+
+    elif tipo_estrutura == 4:
+        print ("Saindo...")
+        sair = True
+        loop = False
 
     else:
-        # Any integer inputs other than values 1-5 we print an error message
-        print ("Wrong option selection. Enter any key to try again..")
+        print ("\nOpcao escolhida invalida!\n")
+
+# ------------------------------ Menu Geral ------------------------------ #
+
+loop=True
+
+while loop and not sair:
+    print_menu_geral()
+    escolha = input("Digite sua escolha [1-X]: ") # Editar o X para o número final de opções
+    escolha = int(escolha)
+
+    if escolha == 1:     
+        print (grafo)
+        print("\n")
+
+    elif escolha == 2:     
+        print ("\nDigite dois vertices para verificar se eles sao vizinhos")
+        parVertices = input("u,v: ")
+        parVertices = parVertices.split(",")
+        u = parVertices[0]
+        v = parVertices[1]
+        print(grafo._ehVizinho(u,v))
+        print("\n")
+
+    elif escolha == 3:
+        print ("\nDigite um vertice para verificar seus vizinhos")
+        vertice = input("u: ")
+        print(grafo._obtemVizinhos(vertice))
+        print("\n")
+
+    elif escolha == 10: # Opção temporária
+        print ("Saindo...")
+        sair = True
+        loop = False
+
+    else:
+        print ("\nOpcao escolhida invalida!\n")
 
 
-instancia = Instancia(tipo_estrutura)
-grafo = instancia._leArquivo(path)
-print(grafo)
-# print(grafo._ehVizinho(1,2)) # True
-# print(grafo._ehVizinho(1,10)) # False
-# # Vizinhos do vertice 2
-# vizinhos = grafo._obtemVizinhos(1)
-# for v in vizinhos:
-#     print(v)
+# ---------------------- Operações Temporárias ---------------------- #
+# ----------- Serão removidas após o término de todos os menus ------ #
 
-# arestas = grafo._obtemArestas()
-# for e in arestas:
-#     print(e)
+if not sair :
+    print (67 * "-")
+    # for v in vizinhos:
+    #     print(v)
+    # arestas = grafo._obtemArestas()
+    # for e in arestas:
+    #     print(e)

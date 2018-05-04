@@ -144,7 +144,7 @@ class MatrizInc(object):
             if(not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
                 if(direcionado == True):
-                    self.__M[self.__nArestas][self._obtemPosicao(v)] = -1*self.__M[self.qtdAresta][self._obtemPosicao(v)]
+                    self.__M[self.__nArestas][self._obtemPosicao(v)] = -1*self.__M[self.__nArestas][self._obtemPosicao(v)]
                 # Aumenta o numero de arestas
                 self.__nArestas = self.__nArestas + 1 
     
