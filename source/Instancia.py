@@ -1,17 +1,20 @@
 from ListaAdj import ListaAdj
+from MatrizAdj import MatrizAdj
+from MatrizInc import MatrizInc
 
 # Definição do nosso "INFINITO"
 INF = 1E8
 
 # Classe que obtem os dados de entrada para a montagem do grafo
 class Instancia(object):
-    def __init__(self, arquivo = None):
+    def __init__(self, tipo_estrutura, arquivo = None):
         # Objeto que realiza a leitura dos arquivos de entrada
-        self.__arquivo = arquivo 
+        self.__arquivo = arquivo
+        self.__tipo_estrutura = tipo_estrutura
   
-    def _leArquivo(self, nomeArq):
+    def _leArquivo(self, path):
         # Objeto que realiza a leitura dos arquivos de entrada
-        self.__arquivo = open(nomeArq, 'r') 
+        self.__arquivo = open(path, 'r') 
 
         linhas = self.__arquivo.readlines()
         
@@ -20,21 +23,19 @@ class Instancia(object):
         if(linhas[0].rstrip('\n') == "UNDIRECTED"): 
             direcionado = False
         
-        # Estrutura de lista de adjacencia 
-        g = ListaAdj()
-        
-        # Estrutura de matriz de adjacencia
-        #g = MatrizAdj()
-        
-        # Estrutura de matriz de incidencia
-        #g = MatrizInc()
-        
-        print (linhas[1])
-        nVertices = int(linhas[1])
+        if self.__tipo_estrutura == 1:
+            g = MatrizAdj()
+        elif self.__tipo_estrutura == 2:
+            g = MatrizInc()
+        elif self.__tipo_estrutura == 3:
+            g = ListaAdj()
+
+        # nVertices = int(linhas[1])
+        nVertices = len(linhas) - 1
         
         # Conjunto de labels dos vertices (faço por conveniência)
         setLabels = set([])
-        for i in range(2, len(linhas)):
+        for i in range(1, len(linhas)):
             linha = linhas[i].split()
             setLabels.add(linha[0])
             setLabels.add(linha[1])
@@ -48,7 +49,7 @@ class Instancia(object):
             g._adiciona(str(i))
         
         # Criacao do grafo
-        for i in range(2, len(linhas)):
+        for i in range(1, len(linhas)):
             linha = linhas[i].split()
             if(len(linha) == 2): # Se for nao-valorado
                 g._adiciona(linha[0], linha[1], 1, direcionado)
