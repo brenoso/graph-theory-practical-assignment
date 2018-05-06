@@ -24,6 +24,7 @@ def print_menu_geral():
     print ("5. ehPredecessor")
     print ("6. ehSucessor")
     print ("7. obtemSucessores")
+    print ("8. obtemPredecessores")
     print ("10. Sair\n")
 
 # Variáveis auxiliares para os menus
@@ -163,9 +164,18 @@ while loop and not sair:
         if grafo._direcionado == False:
             print ("Grafo nao direcionado. Impossivel realizar operacao!")
         else:
-            print ("\nDigite u para obter o conjunto de sucessores desse vertice")
+            print ("\nDigite um vertice u para obter o conjunto de sucessores desse vertice")
             u = input("u: ")
             print(grafo._obtemSucessores(u))
+            print("\n")
+
+    elif escolha == 8:
+        if grafo._direcionado == False:
+            print ("Grafo nao direcionado. Impossivel realizar operacao!")
+        else:
+            print ("\nDigite um vertice u para obter o conjunto de predecessores desse vertice")
+            u = input("u: ")
+            print(grafo._obtemPredecessores(u))
             print("\n")
 
     elif escolha == 10: # Opção temporária

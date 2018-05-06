@@ -169,6 +169,30 @@ class MatrizAdj(object):
 
         return self._obtemVizinhos(u)
 
+    '''
+    Recebe um vértice u como parâmetro e retorna
+    o conjunto de predecessores desse vértice
+    (Todos os vértices que apontam para u)
+    Apenas para grafos direcionados.
+    '''
+    def _obtemPredecessores(self,u):
+        
+        u = int(u)
+        predecessores = []
+
+        # Verifica a existencia do vértice
+        try:
+            self.__M[u][0]
+        except:
+            return []
+
+        # Verifica para cada vértice, se ele é predecessor do vértice u
+        for i in range(self.__nVertices):
+            if self.__M[i][u] != 0 and self.__M[i][u] != INF:
+                predecessores.append(self.__vertices[i])
+
+        return predecessores
+
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
         listaArestas = []

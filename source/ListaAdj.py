@@ -124,6 +124,15 @@ class ListaAdj(object):
     '''
     def _obtemSucessores(self,u):
         return [] # Ainda não implementado - Chamar a função obtemVizinhos
+    
+    '''
+    Recebe um vértice u como parâmetro e retorna
+    o conjunto de predecessores desse vértice
+    (Todos os vértices que apontam para u)
+    Apenas para grafos direcionados.
+    '''
+    def _obtemPredecessores(self,u):
+        return [] # Ainda não implementado
 
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
