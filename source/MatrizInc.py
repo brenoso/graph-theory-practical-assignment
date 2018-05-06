@@ -127,7 +127,7 @@ class MatrizInc(object):
     (a) Um único vértice
     (b) Uma aresta (ou arco), valorada ao não
     '''
-    def _adiciona(self, u, v = None, peso = 1, direcionado = True):
+    def _add(self, u, v = None, peso = 1, direcionado = True):
         if(u == None):
             return
 

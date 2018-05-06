@@ -6,17 +6,18 @@ INF = 1E8
 class MatrizAdj(object): 
     # Construtor da classe
     def __init__(self):
-        self.__M = [] # Cria, inicialmente, uma matriz sem elementos
-        # Numero de vertices (Membro privado da classe)
+
+        # Representa a matriz
+        self.__M = []
         self.__nVertices = 0 
         '''
-        Dicionario que contem o nome do vertice como chave e como 
-        valor, sua posicao na lista
+        Representa o nome do vertice como chave, e como 
+        valor, a sua posicao na lista
         '''
         self.__posicoes = {} 
         '''
-        Dicionario que contem a posicao do vertice na matriz como 
-        chave e como valor, o nome do vertice
+        Representa a posicao do vertice na matriz como 
+        chave, e como valor, o seu nome
         '''
         self.__vertices = {}
     
@@ -39,15 +40,13 @@ class MatrizAdj(object):
         saida += "\n"
         return saida
 
-    '''
-    Dada uma posição da matriz, retorna um vertice (neste caso, 
-    optei pelo nome)
-    '''
+
+    # Retorna o vértice de determinada posição da matriz
     def _obtemVertice(self, pos):
         return self.__vertices[pos]
 
     # Dado um vértice, retorna sua posição relativa na matriz
-    def _obtemPosicao(self, u):
+    def _getPosicao(self, u):
         try:
             return self.__posicoes[str(u)]
         except:
@@ -58,19 +57,19 @@ class MatrizAdj(object):
     relativa na matriz)
     '''
     def _obtemVizinhos(self, u):
-        lista = []
-        pos_u = self._obtemPosicao(str(u))
+        vizinhos = []
+        pos_u = self._getPosicao(str(u))
         for i in range(self.__nVertices):
             if(self.__M[pos_u][i] != 0 and self.__M[pos_u][i] != INF):
-                lista.append(self.__vertices[i])
-        return lista
+                vizinhos.append(self.__vertices[i])
+        return vizinhos
 
-    # Verifica se o vertice u eh vizinho de v
+    # Verifica se o vertice u é vizinho de v
     def _ehVizinho(self, u, v):
         # Obtenção da posição relativa do vértice u
-        pos_u = self._obtemPosicao(u) 
+        pos_u = self._getPosicao(u) 
         # Obtenção da posição relativa do vértice v
-        pos_v = self._obtemPosicao(v) 
+        pos_v = self._getPosicao(v) 
 
         if(pos_u >= 0 and pos_v >= 0):
             return (self.__M[pos_u][pos_v] != 0 and 
@@ -105,23 +104,26 @@ class MatrizAdj(object):
     (a) Um único vértice
     (b) Uma aresta (ou arco), valorada ao não
     '''
-    def _adiciona(self, u, v = None, peso = 1, direcionado = True):
+    def _add(self, u, v = None, peso = 1, direcionado = True):
+     
         if(u == None):
             return
 
-        vertice_u = str(u)
-        # Se v for None, então verificamos a inserção de um vértice
-        if(v == None):
-            # Se u não foi inserido, vamos inserí-lo
-            if(not (vertice_u in self.__posicoes)):
-                self.__criaVertice(u)
+        u = str(u)
 
+        # Se não for passado o argumento v, será considerado apenas o vértice u
+        if(v == None):
+            # Verifica se o vértice u já consta no grafo, caso contrário o insere
+            if(not (u in self.__posicoes)):
+                self.__criaVertice(u)
         else:
-            vertice_v = str(v)
-            # Se u e v não são vizinhos, cria a ligação entre eles
+            v = str(v)
+            # Se u e v ainda não são vizinhos, cria a ligação (aresta) entre eles
             if(not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
 
+                # Se não for direcionado, cria uma aresta fazendo a ligação inversa da
+                # anterior (u->v e u<-v)
                 if(not direcionado):
                     self.__criaAresta(v, u, peso)
     
@@ -131,9 +133,9 @@ class MatrizAdj(object):
     '''
     def __criaAresta(self, u, v, peso = 1):
         # Obtenção da posição relativa do vértice u
-        pos_u = self._obtemPosicao(u) 
+        pos_u = self._getPosicao(u) 
         # Obtenção da posição relativa do vértice v
-        pos_v = self._obtemPosicao(v) 
+        pos_v = self._getPosicao(v) 
         # Ligação dos vértices u e v
         if(pos_u >= 0 and pos_v >= 0):
             self.__M[pos_u][pos_v] = peso
@@ -141,22 +143,32 @@ class MatrizAdj(object):
     # Criacao de um vertice para a matriz
     def __criaVertice(self, u):
         self.__nVertices += 1
+
         self.__M.append([0])
 
-        self.__posicoes[str(u)] = self.__nVertices - 1
+        self.__posicoes[str(u)] = self.__nVertices - 1 # Adiciona o vértice na lista de posicões
+        
         self.__vertices[self.__nVertices - 1] = str(u)
 
-        # Se tamanho é igual a 1, teremos apenas um vértice isolado
+        '''
+        Retorna caso o número de vértices no grafo seja 1
+        pois não terá nenhuma ligação com outro vértice
+        '''
         if(self.__nVertices == 1):
             return
 
         '''
-        Para cada vértice do grafo, adicionamos sua ligação 
-        ao novo vértice
+        Varre toda a matriz adicionando a cada linha (vértice do grafo)
+        mais uma coluna (que representa a ligação com o novo vértice)
+        inicialmente com o valor 0
         '''
-        for i in range(self.__nVertices - 1):        
+        for i in range(self.__nVertices - 1):
             self.__M[i].append(0)
 
-        # Criamos as arestas do novo grafo
+
+        '''
+        Cria as conexões (arestas) do novo vértice
+        preenchendo todas as suas colunas com o valor 0
+        '''
         for i in range(self.__nVertices - 1):
             self.__M[self.__nVertices - 1].append(0)

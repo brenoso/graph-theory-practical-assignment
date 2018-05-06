@@ -121,7 +121,7 @@ class ListaAdj(object):
     (a) Um único vértice
     (b) Uma aresta (ou arco), valorada ao não
     '''
-    def _adiciona(self, u, v = None, peso = 1, ehDirecionado = False):
+    def _add(self, u, v = None, peso = 1, ehDirecionado = False):
         if(u == None):
             return # Nem  vértice de origem é válido
         

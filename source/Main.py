@@ -1,4 +1,5 @@
-from Instancia import Instancia
+#Importações
+from Grafo import Grafo
 import os
 
 # ---------------------- Definição dos Menus ---------------------- #
@@ -33,16 +34,17 @@ while loop:
     print_menu_arquivo()
     arquivo = input()
     path = None
-
+    
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
-        for file in files:
-            if arquivo in file:
-                print("\nArquivo encontrado!")
-                path = os.path.join(root, file)
-                print("Caminho: " + path +"\n")
-                loop = False
-                break # Evita encontrar dois arquivos com o mesmo nome
+        if path is None: # Evita encontrar dois arquivos com o mesmo nome
+            for file in files:
+                if arquivo in file:
+                    print("\nArquivo encontrado!")
+                    path = os.path.join(root, file)
+                    print("Caminho: " + path +"\n")
+                    loop = False
+                    break # Evita encontrar dois arquivos com o mesmo nome
     
     if path is None:
         print("\nArquivo nao encontrado!\n")
@@ -59,8 +61,8 @@ while loop:
 
     def cria_grafo():
         global grafo # Torna o grafo acessível fora desse contexto
-        grafo = Instancia(tipo_estrutura)
-        grafo = grafo._leArquivo(path)
+        grafo = Grafo(tipo_estrutura, path)
+        grafo = grafo._cria()
         print(grafo)
 
     if tipo_estrutura == 1:     
@@ -95,9 +97,9 @@ while loop and not sair:
     escolha = input("Digite sua escolha [1-X]: ") # Editar o X para o número final de opções
     escolha = int(escolha)
 
-    if escolha == 1:     
+    if escolha == 1:
+        print("\n")     
         print (grafo)
-        print("\n")
 
     elif escolha == 2:     
         print ("\nDigite dois vertices para verificar se eles sao vizinhos")
