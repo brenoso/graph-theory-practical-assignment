@@ -34,11 +34,11 @@ class Grafo(object):
         
         # Instancia o tipo de estrutura escolhida no menu
         if self.__tipo_estrutura == 1:
-            g = MatrizAdj()
+            g = MatrizAdj(direcionado)
         elif self.__tipo_estrutura == 2:
-            g = MatrizInc()
+            g = MatrizInc(direcionado)
         elif self.__tipo_estrutura == 3:
-            g = ListaAdj()
+            g = ListaAdj(direcionado)
 
         nVertices = len(linhas) - 1 # A primeira linha representa a orientação do grafo
         
@@ -58,10 +58,9 @@ class Grafo(object):
         for i in range(1, len(linhas)):
             linha = linhas[i].split()
             if(len(linha) == 2): # Se for nao-valorado
-                g._add(linha[0], linha[1], 1, direcionado)
+                g._add(linha[0], linha[1], 1)
                 
             else: # Se for valorado
-                g._add(linha[0], linha[1], float(linha[2]), 
-                            direcionado)
+                g._add(linha[0], linha[1], float(linha[2]))
                 
         return g

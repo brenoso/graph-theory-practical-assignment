@@ -5,7 +5,7 @@ INF = 1E8
 
 class MatrizAdj(object): 
     # Construtor da classe
-    def __init__(self):
+    def __init__(self, direcionado):
 
         # Representa a matriz
         self.__M = []
@@ -20,6 +20,7 @@ class MatrizAdj(object):
         chave, e como valor, o seu nome
         '''
         self.__vertices = {}
+        self.__direcionado = direcionado
     
     # Destrutor da classe
     def __del__(self):  
@@ -80,11 +81,33 @@ class MatrizAdj(object):
 
     # Remove o vertice u do grafo
     def _removeVertice(self, u):
-        print("Exercicio")
+        print("Ainda nao implementado")
 
-    # Remove a aresta (u,v) do grafo
-    def _removeAresta(self, e, u, v):
-        print("Exercicio")
+    # Deleta a aresta (u,v) do grafo
+    def _deletaAresta(self, u, v):
+        u = int(u)
+        v = int(v)
+
+        # Tenta acessar a posicao da possível aresta na matriz
+        try:
+            self.__M[u][v]
+        except:
+            return False
+
+        if self.__M[u][v] != 0 and self.__M[u][v] != INF: # Checa a existencia da aresta
+            self.__M[u][v] = 0 # Remove a aresta            
+        else:
+            return False # Aresta não removida pois já não existia.
+
+        ''' 
+        Verifica se o grafo é direcionado. Caso não seja
+        deve remover a (u,v) e a (v,u) na matriz
+        '''
+        if self.__direcionado == True:
+            return True # Retorna que a aresta (u,v) foi removida com sucesso
+        else:
+            self.__M[v][u] = 0
+            return True # Remove também a (v,u) e retorna sucesso
         
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
@@ -104,7 +127,7 @@ class MatrizAdj(object):
     (a) Um único vértice
     (b) Uma aresta (ou arco), valorada ao não
     '''
-    def _add(self, u, v = None, peso = 1, direcionado = True):
+    def _add(self, u, v = None, peso = 1):
      
         if(u == None):
             return
@@ -124,7 +147,7 @@ class MatrizAdj(object):
 
                 # Se não for direcionado, cria uma aresta fazendo a ligação inversa da
                 # anterior (u->v e u<-v)
-                if(not direcionado):
+                if(not self.__direcionado):
                     self.__criaAresta(v, u, peso)
     
     '''

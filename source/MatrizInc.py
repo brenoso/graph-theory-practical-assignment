@@ -5,7 +5,7 @@ INF = 1E8
 
 class MatrizInc(object): 
     # Construtor da classe
-    def __init__(self):
+    def __init__(self, direcionado):
         self.__M = [] # Cria, inicialmente, uma matriz sem elementos
         # Numero de vertices (Membro privado da classe)
         self.__nVertices = 0
@@ -20,7 +20,8 @@ class MatrizInc(object):
         Dicionario que contem a posicao do vertice na matriz como chave 
         e como valor, o nome do vertice
         '''
-        self.__vertices = {} 
+        self.__vertices = {}
+        self.__direcionado = direcionado
     
     # Destrutor da classe
     def __del__(self):  
@@ -87,14 +88,13 @@ class MatrizInc(object):
         # Caso pos_u == -1 ou pos_v == -1
         return False
 
-    # Remove o vertice u do grafo
+    # _deletaAresta o vertice u do grafo
     def _removeVertice(self, u):
         print("Exercicio")
 
     # Remove a aresta (u,v) do grafo
-    def _removeAresta(self, e, u, v):
-        print("Exercicio")
-      
+    def _deletaAresta(self, u, v):
+        print("Ainda nao implementada")
       
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
@@ -127,7 +127,7 @@ class MatrizInc(object):
     (a) Um único vértice
     (b) Uma aresta (ou arco), valorada ao não
     '''
-    def _add(self, u, v = None, peso = 1, direcionado = True):
+    def _add(self, u, v = None, peso = 1):
         if(u == None):
             return
 
@@ -143,7 +143,7 @@ class MatrizInc(object):
             # Se u e v não são vizinhos, cria a ligação entre eles
             if(not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
-                if(direcionado == True):
+                if(self.__direcionado == True):
                     self.__M[self.__nArestas][self._obtemPosicao(v)] = -1*self.__M[self.__nArestas][self._obtemPosicao(v)]
                 # Aumenta o numero de arestas
                 self.__nArestas = self.__nArestas + 1 

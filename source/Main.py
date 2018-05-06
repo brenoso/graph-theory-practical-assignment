@@ -20,6 +20,7 @@ def print_menu_geral():
     print("1. Imprimir")
     print ("2. ehVizinho")
     print ("3. obtemVizinho")
+    print ("4. Deletar Aresta")
     print ("10. Sair\n")
 
 # Variáveis auxiliares para os menus
@@ -37,6 +38,7 @@ while loop:
     
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
+    #for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -115,6 +117,20 @@ while loop and not sair:
         vertice = input("u: ")
         print(grafo._obtemVizinhos(vertice))
         print("\n")
+    
+    elif escolha == 4:
+        print ("\nDigite a aresta que deseja remover")
+        aresta = input("u,v: ")
+        aresta = aresta.split(",")
+        u = aresta[0]
+        v = aresta[1]
+        resultado = grafo._deletaAresta(u,v)
+
+        if resultado == True:
+            print("\nAresta removida com sucesso!\n")
+            print(grafo)
+        else:
+            print ("\nAresta nao removida pois ja nao existia!")
 
     elif escolha == 10: # Opção temporária
         print ("Saindo...")

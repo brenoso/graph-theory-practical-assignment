@@ -7,7 +7,7 @@ INF = 1E8
 # Classe Grafo - Matriz de Adjacências
 class ListaAdj(object):
     # Construtor da classe
-    def __init__(self):
+    def __init__(self, direcionado):
         # Lista de adjacencia de vertices (Membro privado da classe)
         self.__lista = [] 
         # Numero de vertices (Membro privado da classe)
@@ -16,7 +16,8 @@ class ListaAdj(object):
         Dicionario que contem o nome do vertice como chave e 
         como valor, sua posicao na lista
         '''
-        self.__posicoes = {} 
+        self.__posicoes = {}
+        self.__direcionado = direcionado
 
     # Destrutor da classe
     def __del__(self):  
@@ -96,8 +97,8 @@ class ListaAdj(object):
         print("Exercício")
     
     # Remove a aresta (u,v) do grafo
-    def _removeAresta(self, u, v):
-        print("Exercício")
+    def _deletaAresta(self, u, v):
+        print("Ainda nao implementada")
         
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
@@ -121,7 +122,7 @@ class ListaAdj(object):
     (a) Um único vértice
     (b) Uma aresta (ou arco), valorada ao não
     '''
-    def _add(self, u, v = None, peso = 1, ehDirecionado = False):
+    def _add(self, u, v = None, peso = 1):
         if(u == None):
             return # Nem  vértice de origem é válido
         
@@ -143,7 +144,7 @@ class ListaAdj(object):
             if(pos_u >= 0 and pos_v >= 0 and not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
 
-                if(not ehDirecionado):
+                if(not self.__direcionado):
                     self.__criaAresta(v, u, peso)
     
     '''
