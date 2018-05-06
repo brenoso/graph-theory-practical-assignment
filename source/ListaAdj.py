@@ -116,6 +116,15 @@ class ListaAdj(object):
     def _ehSucessor(self,u,v):
         return False #Ainda não implementado
 
+    '''
+    Recebe um vértice u como parâmetro e retorna
+    o conjunto de sucessores desse vértice
+    (Todos os vértices dos quais u aponta)
+    Apenas para grafos direcionados.
+    '''
+    def _obtemSucessores(self,u):
+        return [] # Ainda não implementado - Chamar a função obtemVizinhos
+
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
         # Lista de arestas

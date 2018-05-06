@@ -150,6 +150,24 @@ class MatrizAdj(object):
             return True
         else:
             return False
+    
+    '''
+    Recebe um vértice u como parâmetro e retorna
+    o conjunto de sucessores desse vértice
+    (Todos os vértices dos quais u aponta)
+    Apenas para grafos direcionados.
+    '''
+    def _obtemSucessores(self,u):
+        
+        u = int(u)
+
+        # Tenta acessar a posicao da aresta na matriz
+        try:
+            self.__M[u][0]
+        except:
+            return []
+
+        return self._obtemVizinhos(u)
 
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):

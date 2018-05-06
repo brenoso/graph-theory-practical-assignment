@@ -23,6 +23,7 @@ def print_menu_geral():
     print ("4. Deletar Aresta")
     print ("5. ehPredecessor")
     print ("6. ehSucessor")
+    print ("7. obtemSucessores")
     print ("10. Sair\n")
 
 # Variáveis auxiliares para os menus
@@ -39,8 +40,8 @@ while loop:
     path = None
     
     # Navega pela pasta a procura do arquivo
-    # for root, dirs, files in os.walk("../instances"):
-    for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
+    for root, dirs, files in os.walk("../instances"):
+    #for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -156,6 +157,15 @@ while loop and not sair:
             u = vertices[0]
             v = vertices[1]
             print(grafo._ehSucessor(u,v))
+            print("\n")
+
+    elif escolha == 7:
+        if grafo._direcionado == False:
+            print ("Grafo nao direcionado. Impossivel realizar operacao!")
+        else:
+            print ("\nDigite u para obter o conjunto de sucessores desse vertice")
+            u = input("u: ")
+            print(grafo._obtemSucessores(u))
             print("\n")
 
     elif escolha == 10: # Opção temporária
