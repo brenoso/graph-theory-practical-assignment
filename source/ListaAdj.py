@@ -17,7 +17,7 @@ class ListaAdj(object):
         como valor, sua posicao na lista
         '''
         self.__posicoes = {}
-        self.__direcionado = direcionado
+        self._direcionado = direcionado
 
     # Destrutor da classe
     def __del__(self):  
@@ -94,11 +94,19 @@ class ListaAdj(object):
   
     # Remove o vértice u do grafo
     def _removeVertice(self, u):
-        print("Exercício")
+        return False # Ainda não implementado
     
     # Remove a aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
-        print("Ainda nao implementada")
+        return False # Ainda não implementado
+    
+    '''
+    Recebe dois vértices u e v como parâmetros 
+    e retorna true se v é predecessor de u (v aponta pra u)
+    Apenas para grafos direcionados.
+    '''
+    def _ehPredecessor(self,u,v):
+        return False # Ainda não implementado
         
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
@@ -144,7 +152,7 @@ class ListaAdj(object):
             if(pos_u >= 0 and pos_v >= 0 and not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
 
-                if(not self.__direcionado):
+                if(not self._direcionado):
                     self.__criaAresta(v, u, peso)
     
     '''

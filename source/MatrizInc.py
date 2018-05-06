@@ -21,7 +21,7 @@ class MatrizInc(object):
         e como valor, o nome do vertice
         '''
         self.__vertices = {}
-        self.__direcionado = direcionado
+        self._direcionado = direcionado
     
     # Destrutor da classe
     def __del__(self):  
@@ -90,12 +90,20 @@ class MatrizInc(object):
 
     # _deletaAresta o vertice u do grafo
     def _removeVertice(self, u):
-        print("Exercicio")
+        return False # Ainda não implementado
 
     # Remove a aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
-        print("Ainda nao implementada")
-      
+        return False # Ainda não implementado
+    
+    '''
+    Recebe dois vértices u e v como parâmetros 
+    e retorna true se v é predecessor de u (v aponta pra u)
+    Apenas para grafos direcionados.
+    '''
+    def _ehPredecessor(self,u,v):
+        return False # Ainda não implementado
+
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
         listaArestas = []
@@ -143,7 +151,7 @@ class MatrizInc(object):
             # Se u e v não são vizinhos, cria a ligação entre eles
             if(not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
-                if(self.__direcionado == True):
+                if(self._direcionado == True):
                     self.__M[self.__nArestas][self._obtemPosicao(v)] = -1*self.__M[self.__nArestas][self._obtemPosicao(v)]
                 # Aumenta o numero de arestas
                 self.__nArestas = self.__nArestas + 1 

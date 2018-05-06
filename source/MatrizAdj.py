@@ -20,7 +20,7 @@ class MatrizAdj(object):
         chave, e como valor, o seu nome
         '''
         self.__vertices = {}
-        self.__direcionado = direcionado
+        self._direcionado = direcionado
     
     # Destrutor da classe
     def __del__(self):  
@@ -103,12 +103,34 @@ class MatrizAdj(object):
         Verifica se o grafo é direcionado. Caso não seja
         deve remover a (u,v) e a (v,u) na matriz
         '''
-        if self.__direcionado == True:
+        if self._direcionado == True:
             return True # Retorna que a aresta (u,v) foi removida com sucesso
         else:
             self.__M[v][u] = 0
             return True # Remove também a (v,u) e retorna sucesso
-        
+
+    '''
+    Recebe dois vértices u e v como parâmetros 
+    e retorna true se v é predecessor de u (v aponta pra u)
+    Apenas para grafos direcionados.
+    '''
+    def _ehPredecessor(self,u,v):
+
+        u = int(u)
+        v = int(v)
+
+        # Tenta acessar a posicao da aresta na matriz
+        try:
+            self.__M[v][u]
+        except:
+            return False
+            
+        if self.__M[v][u] != 0 and self.__M[v][u] != INF: # Se v aponta para u retorna True
+            return True
+        else:
+            return False
+
+
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
         listaArestas = []
@@ -147,7 +169,7 @@ class MatrizAdj(object):
 
                 # Se não for direcionado, cria uma aresta fazendo a ligação inversa da
                 # anterior (u->v e u<-v)
-                if(not self.__direcionado):
+                if(not self._direcionado):
                     self.__criaAresta(v, u, peso)
     
     '''

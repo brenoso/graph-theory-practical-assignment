@@ -21,6 +21,7 @@ def print_menu_geral():
     print ("2. ehVizinho")
     print ("3. obtemVizinho")
     print ("4. Deletar Aresta")
+    print ("5. ehPredecessor")
     print ("10. Sair\n")
 
 # Variáveis auxiliares para os menus
@@ -131,6 +132,18 @@ while loop and not sair:
             print(grafo)
         else:
             print ("\nAresta nao removida pois ja nao existia!")
+
+    elif escolha == 5:
+        if grafo._direcionado == False:
+            print ("Grafo nao direcionado. Impossivel realizar operacao!")
+        else:
+            print ("\nDigite u,v para checar se v é predecessor de u (v->u)")
+            vertices = input("u,v: ")
+            vertices = vertices.split(",")
+            u = vertices[0]
+            v = vertices[1]
+            print(grafo._ehPredecessor(u,v))
+            print("\n")
 
     elif escolha == 10: # Opção temporária
         print ("Saindo...")
