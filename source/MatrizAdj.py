@@ -130,6 +130,26 @@ class MatrizAdj(object):
         else:
             return False
 
+    '''
+    Recebe dois vértices u e v como parâmetros 
+    e retorna true se v é sucessor de u (u aponta pra v)
+    Apenas para grafos direcionados.
+    '''
+    def _ehSucessor(self,u,v):
+
+        u = int(u)
+        v = int(v)
+
+        # Tenta acessar a posicao da aresta na matriz
+        try:
+            self.__M[u][v]
+        except:
+            return False
+            
+        if self.__M[u][v] != 0 and self.__M[u][v] != INF: # Se u aponta para v retorna True
+            return True
+        else:
+            return False
 
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):

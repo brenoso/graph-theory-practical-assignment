@@ -104,6 +104,14 @@ class MatrizInc(object):
     def _ehPredecessor(self,u,v):
         return False # Ainda não implementado
 
+    '''
+    Recebe dois vértices u e v como parâmetros 
+    e retorna true se v é sucessor de u (u aponta pra v)
+    Apenas para grafos direcionados.
+    '''
+    def _ehSucessor(self,u,v):
+        return False #Ainda não implementado
+
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
         listaArestas = []
@@ -129,7 +137,7 @@ class MatrizInc(object):
             listaArestas.append(aresta)
               
         return listaArestas
-      
+
     '''
     Nesta função, adicionamos um novo elemento ao grafo, que pode ser:
     (a) Um único vértice
