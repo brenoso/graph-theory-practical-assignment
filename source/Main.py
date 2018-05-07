@@ -20,11 +20,12 @@ def print_menu_geral():
     print("1. Imprimir")
     print ("2. ehVizinho")
     print ("3. obtemVizinho")
-    print ("4. Deletar Aresta")
+    print ("4. Deletar uma Aresta")
     print ("5. ehPredecessor")
     print ("6. ehSucessor")
     print ("7. obtemSucessores")
     print ("8. obtemPredecessores")
+    print ("9. Deletar um vertice")
     print ("10. Sair\n")
 
 # Variáveis auxiliares para os menus
@@ -39,7 +40,7 @@ while loop:
     print_menu_arquivo()
     arquivo = input()
     path = None
-    
+   
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
     #for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
@@ -177,6 +178,17 @@ while loop and not sair:
             u = input("u: ")
             print(grafo._obtemPredecessores(u))
             print("\n")
+
+    elif escolha == 9:
+        
+        print ("\nDigite o vertice que deseja remover")
+        u = input("u:")
+
+        if (grafo._deletaVertice(u) == True):
+            print("\nVertice removido com sucesso!\n")
+            print(grafo)
+        else:
+            print("Vertice inexistente! Impossivel realizar operacao!")
 
     elif escolha == 10: # Opção temporária
         print ("Saindo...")

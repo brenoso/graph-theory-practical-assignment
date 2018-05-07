@@ -1,4 +1,6 @@
+#Importações
 from Aresta import Aresta
+from copy import deepcopy
 
 # Definição do nosso "INFINITO"
 INF = 1E8
@@ -192,6 +194,43 @@ class MatrizAdj(object):
                 predecessores.append(self.__vertices[i])
 
         return predecessores
+
+    '''
+    Deleta um vértice do grafo e as arestas 
+    indicentes a ele (por consequência)
+    '''
+    def _deletaVertice(self,u):
+
+        # Verifica se o vértice existe
+        if(u in self.__posicoes):
+
+            u = int(u)
+
+            # Efetua as remoções nas linhas e colunas da matriz
+            self.__M.remove(self.__M[self.__posicoes[str(u)]])
+            deleted_column = [i.pop(self.__posicoes[str(u)]) for i in self.__M]
+            self.__nVertices = self.__nVertices - 1
+            
+            # Remove o vértice do dicionário de posições
+            del self.__posicoes[str(u)]
+
+            # Atualiza o dicionário de posições
+            i = 0
+            for key in self.__posicoes:
+                self.__posicoes[key] = i
+                i = i + 1
+
+            '''
+            Como o dicionário de vértices é o inverso do dicionário de posições,
+            atualiza o dicionário de vértices com o inverso do dicionário de posições
+            atualizado
+            '''
+            self.__vertices = {v: k for k, v in self.__posicoes.items()}
+
+            return True
+
+        else:
+            return False
 
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):

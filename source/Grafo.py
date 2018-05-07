@@ -39,8 +39,6 @@ class Grafo(object):
             g = MatrizInc(direcionado)
         elif self.__tipo_estrutura == 3:
             g = ListaAdj(direcionado)
-
-        nVertices = len(linhas) - 1 # A primeira linha representa a orientação do grafo
         
         # Busca cada vértice do grafo e os adiciona em uma lista de inteiros
         vertices = set([])

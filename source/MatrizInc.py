@@ -129,6 +129,14 @@ class MatrizInc(object):
     '''
     def _obtemPredecessores(self,u):
         return [] # Ainda não implementado
+    
+    '''
+    Deleta um vértice do grafo e as arestas 
+    indicentes a ele (por consequência)
+    '''
+    def _deletaVertice(self,u):
+        return False # Ainda não implementado
+
 
     # Esta funcao retorna a lista de arestas do grafo
     def _obtemArestas(self):
