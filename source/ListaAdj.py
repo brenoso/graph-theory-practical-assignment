@@ -125,8 +125,16 @@ class ListaAdj(object):
     (Todos os vértices dos quais u aponta)
     Apenas para grafos direcionados.
     '''
-    def _obtemSucessores(self,u):
-        return [] # Ainda não implementado - Chamar a função obtemVizinhos
+    def _obtemSucessores(self, u):
+        listaDeSucessores = []
+
+        for v in self.__lista:
+            for v2 in self.__lista:
+                if (u == v._obtemNome() and self._ehSucessor(u, v2._obtemNome())):
+                    # Só tá adicionando o primeiro sucessor
+                    listaDeSucessores.append(v2._obtemNome())
+
+        return listaDeSucessores
     
     '''
     Recebe um vértice u como parâmetro e retorna
