@@ -56,45 +56,57 @@ class ListaAdj(object):
         except:
             return -1
 
-    # Retorna a lista de vizinhos do vertice u
+    '''
+    Retorna os vizinhos do vertice u (retorna sua posicao 
+    relativa na matriz)
+    Em grafos direcionados serão considerados vizinhos apenas
+    os sucessores diretos do vértice
+    '''
     def _obtemVizinhos(self, u):
-        lista = [] # Lista dos nomes dos vértices
 
         # Obtendo a posicao do vertice u
-        pos = self._obtemPosicao(u)
+        pos_u = self._obtemPosicao(u)
 
-        # Já partindo do próximo vértice que u aponta
-        aux = self.__lista[pos]._obtemProximo()
+        # Se for diferente significa que o vértice não existe
+        if pos_u >= 0:
 
-        # Enquanto pudermos avançar na lista
-        while(aux != None):
-            tmp = self._obtemPosicao(aux._obtemNome())
-            lista.append(self.__lista[tmp]._obtemNome())
-            aux = aux._obtemProximo()
-        return lista
+            lista = [] # Lista dos nomes dos vértices
+
+            # Já partindo do próximo vértice que u aponta
+            aux = self.__lista[pos_u]._obtemProximo()
+
+            # Enquanto pudermos avançar na lista
+            while(aux != None):
+                tmp = self._obtemPosicao(aux._obtemNome())
+                lista.append(self.__lista[tmp]._obtemNome())
+                aux = aux._obtemProximo()
+            return lista
+        
+        else:
+            return []
  
-    # Retorna True se os vertices u e v sao vizinhos
+    '''
+    Verifica se o vertice v é vizinho de u.
+    Em grafos direcionados serão considerados vizinhos apenas
+    os sucessores diretos do vértice
+    '''
     def _ehVizinho(self, u, v):
         vertice_u = str(u)
         vertice_v = str(v)
 
-        # Busca o vértice de nome 'u'
+        # Busca o vértice u
         pos_u = self._obtemPosicao(vertice_u)
         aux = self.__lista[pos_u]
         while(aux != None): # Buscamos na lista do vértice 'u'
-            # Se encontramos 'v' nesta lista
+            # Se encontramos vértice v nesta lista
             if(aux._obtemNome() == vertice_v): 
-                return True # Conclusão: 'u' e 'v' são vizinhos
-            aux = aux._obtemProximo() # Senão, vamos para o próximo da lista
+                return True # Retorna True caso 'u' e 'v' sejam vizinhos
+            aux = aux._obtemProximo() # Caso contrário vai para o próximo da lista
         '''
         Por fim, caso não encontremos 'v' na lista de 'u', 
         retornamos False
         '''
-        return False 
-  
-    # Remove o vértice u do grafo
-    def _removeVertice(self, u):
-        return False # Ainda não implementado
+        return False
     
     # Remove a aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
@@ -112,29 +124,22 @@ class ListaAdj(object):
     Recebe dois vértices u e v como parâmetros 
     e retorna true se v é sucessor de u (u aponta pra v)
     Apenas para grafos direcionados.
+    Serão considerados sucessores todos os vizinhos do vértice.
     '''
     def _ehSucessor(self,u,v):
-        for vertice in self.__lista:
-            if (u == vertice._obtemNome() and v == vertice._obtemProximo()._obtemNome()):
-                return True
-        return False
+        
+        return self._ehVizinho(u,v)
 
     '''
     Recebe um vértice u como parâmetro e retorna
     o conjunto de sucessores desse vértice
     (Todos os vértices dos quais u aponta)
     Apenas para grafos direcionados.
+    Serão considerados sucessores todos os vizinhos do vértice.
     '''
     def _obtemSucessores(self, u):
-        listaDeSucessores = []
-
-        for v in self.__lista:
-            for v2 in self.__lista:
-                if (u == v._obtemNome() and self._ehSucessor(u, v2._obtemNome())):
-                    # Só tá adicionando o primeiro sucessor
-                    listaDeSucessores.append(v2._obtemNome())
-
-        return listaDeSucessores
+        
+        return self._obtemVizinhos(u)
     
     '''
     Recebe um vértice u como parâmetro e retorna

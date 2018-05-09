@@ -58,16 +58,30 @@ class MatrizAdj(object):
     '''
     Retorna os vizinhos do vertice u (retorna sua posicao 
     relativa na matriz)
+    Em grafos direcionados serão considerados vizinhos apenas
+    os sucessores diretos do vértice
     '''
     def _obtemVizinhos(self, u):
-        vizinhos = []
+       
         pos_u = self._getPosicao(str(u))
-        for i in range(self.__nVertices):
-            if(self.__M[pos_u][i] != 0 and self.__M[pos_u][i] != INF):
-                vizinhos.append(self.__vertices[i])
-        return vizinhos
 
-    # Verifica se o vertice u é vizinho de v
+        # Se for diferente significa que o vértice não existe
+        if pos_u >= 0:
+            vizinhos = []
+
+            for i in range(self.__nVertices):
+                if(self.__M[pos_u][i] != 0 and self.__M[pos_u][i] != INF):
+                    vizinhos.append(self.__vertices[i])
+            return vizinhos
+
+        else:
+            return []
+
+    '''
+    Verifica se o vertice v é vizinho de u.
+    Em grafos direcionados serão considerados vizinhos apenas
+    os sucessores diretos do vértice
+    '''
     def _ehVizinho(self, u, v):
         # Obtenção da posição relativa do vértice u
         pos_u = self._getPosicao(u) 
@@ -80,10 +94,6 @@ class MatrizAdj(object):
 
         # Caso pos_u == -1 ou pos_v == -1
         return False
-
-    # Remove o vertice u do grafo
-    def _removeVertice(self, u):
-        print("Ainda nao implementado")
 
     # Deleta a aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
@@ -158,6 +168,7 @@ class MatrizAdj(object):
     o conjunto de sucessores desse vértice
     (Todos os vértices dos quais u aponta)
     Apenas para grafos direcionados.
+    Serão considerados sucessores todos os vizinhos do vértice.
     '''
     def _obtemSucessores(self,u):
         

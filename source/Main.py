@@ -17,9 +17,9 @@ def print_menu_estrutura_dados():
 def print_menu_geral():
     print (67 * "-")
     print ("\nSelecione a operacao para executar no grafo:")
-    print("1. Imprimir")
+    print("1. Imprimir o grafo")
     print ("2. ehVizinho")
-    print ("3. obtemVizinho")
+    print ("3. obtemVizinhos")
     print ("4. Deletar uma Aresta")
     print ("5. ehPredecessor")
     print ("6. ehSucessor")
@@ -43,7 +43,7 @@ while loop:
    
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
-    #for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
+    # for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -109,7 +109,7 @@ while loop and not sair:
         print (grafo)
 
     elif escolha == 2:     
-        print ("\nDigite dois vertices para verificar se eles sao vizinhos")
+        print ("\nDigite os vertices u,v para verificar se o vertice v é vizinho de u")
         parVertices = input("u,v: ")
         parVertices = parVertices.split(",")
         u = parVertices[0]
@@ -197,15 +197,3 @@ while loop and not sair:
 
     else:
         print ("\nOpcao escolhida invalida!\n")
-
-
-# ---------------------- Operações Temporárias ---------------------- #
-# ----------- Serão removidas após o término de todos os menus ------ #
-
-if not sair :
-    print (67 * "-")
-    # for v in vizinhos:
-    #     print(v)
-    # arestas = grafo._obtemArestas()
-    # for e in arestas:
-    #     print(e)
