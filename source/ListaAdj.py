@@ -118,8 +118,21 @@ class ListaAdj(object):
     Apenas para grafos direcionados.
     '''
     def _ehPredecessor(self,u,v):
-        return False # Ainda não implementado
 
+        pos_v = self._obtemPosicao(v)
+        v = self._obtemVertice(pos_v)
+        proximo = v._obtemProximo() # Obtém o próximo vértice de v
+
+        # Continua percorrendo os próximos vértices de v
+        while(proximo != None):
+
+            # Retorna True se u estiver na lista de próximos de v
+            if (proximo._obtemNome() == u): 
+                return True
+            
+            proximo = proximo._obtemProximo()
+
+        return False
     '''
     Recebe dois vértices u e v como parâmetros 
     e retorna true se v é sucessor de u (u aponta pra v)
@@ -159,7 +172,7 @@ class ListaAdj(object):
 
             # Continua percorrendo os próximos vértices sucessores do vertice atual
             while(proximo != None):
-                
+
                 if (proximo._obtemNome() == u):
                     predecessores.append(vertice._obtemNome())
                 
