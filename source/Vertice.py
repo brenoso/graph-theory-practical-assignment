@@ -32,7 +32,7 @@ class Vertice(object):
             return
         self.proximo = v
                 
-    # Modifica o próximo vértice em sua lista
+    # Modifica o próximo vértice da sua lista
     def _modificaProximo(self, v):
         self.__proximo = v
         
@@ -44,6 +44,6 @@ class Vertice(object):
     def _obtemPeso(self):
         return self.__peso
     
-    # Obtem o próximo vértice a lista
+    # Retorna o próximo vértice da lista
     def _obtemProximo(self):
         return self.__proximo

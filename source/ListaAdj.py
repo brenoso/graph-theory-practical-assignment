@@ -148,7 +148,24 @@ class ListaAdj(object):
     Apenas para grafos direcionados.
     '''
     def _obtemPredecessores(self,u):
-        return [] # Ainda não implementado
+
+        predecessores = []
+
+        # Percorre toda a lista
+        for vertice in self.__lista:
+
+            # Obtém o primeiro vértice ao qual o vértice analisado aponta
+            proximo = vertice._obtemProximo()
+
+            # Continua percorrendo os próximos vértices sucessores do vertice atual
+            while(proximo != None):
+                
+                if (proximo._obtemNome() == u):
+                    predecessores.append(vertice._obtemNome())
+                
+                proximo = proximo._obtemProximo()
+
+        return predecessores
     
     '''
     Deleta um vértice do grafo e as arestas 
