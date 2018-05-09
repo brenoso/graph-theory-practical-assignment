@@ -114,10 +114,7 @@ class ListaAdj(object):
     Apenas para grafos direcionados.
     '''
     def _ehSucessor(self,u,v):
-        for vertice in self.__lista:
-            if (u == vertice._obtemNome() and v == vertice._obtemProximo()._obtemNome()):
-                return True
-        return False
+        return self._ehVizinho(u,v)
 
     '''
     Recebe um vértice u como parâmetro e retorna
