@@ -121,7 +121,12 @@ class MatrizInc(object):
     Serão considerados sucessores todos os vizinhos do vértice.
     '''
     def _ehSucessor(self,u,v):
-        return False #Ainda não implementado
+
+        for i in range(self.__nArestas):
+            if (self.__M[i][int(u)] and self.__M[i][int(v)] < 0) and self._direcionado:
+                return True
+        return False
+
 
     '''
     Recebe um vértice u como parâmetro e retorna
