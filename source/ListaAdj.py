@@ -110,8 +110,26 @@ class ListaAdj(object):
     
     # Remove a aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
-        return False # Ainda não implementado
-    
+
+        for a in self._obtemArestas():
+            au = a._obtemAresta()[0]
+            av = a._obtemAresta()[1]
+
+            if au == u and av == v:
+                print('Encontrou: ' + str(self._obtemVertice(int(u))))
+                print('Encontrou: ' + str(self._obtemVertice(int(v))))
+
+                # Dando erro ao acessar self.__lista[pos_u] após a primeira remoção
+                # Tem que dar -- em alguma variavel q controla esse loop???
+                self.__lista.remove(self._obtemVertice(int(u)))
+                if not self._direcionado:
+                    self.__lista.remove(self._obtemVertice(int(v)))
+
+                return True
+
+        return False
+
+
     '''
     Recebe dois vértices u e v como parâmetros 
     e retorna true se v é predecessor de u (v aponta pra u)
