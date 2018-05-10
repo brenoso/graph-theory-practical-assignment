@@ -43,7 +43,7 @@ while loop:
    
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
-    #for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
+    # for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -54,7 +54,7 @@ while loop:
                     break # Evita encontrar dois arquivos com o mesmo nome
     
     if path is None:
-        print("\nArquivo nao encontrado!\n")
+        print("\nArquivo nao encontrado! Certifique de estar rodando o sistema a partir da pasta raiz!\n")
 
 # ---------------------- Menu de Estrutura de Dados ---------------------- #
 
@@ -109,7 +109,7 @@ while loop and not sair:
         print (grafo)
 
     elif escolha == 2:     
-        print ("\nDigite os vertices u,v para verificar se o vertice v é vizinho de u")
+        print ("\nDigite os vertices u,v para verificar se o vertice v eh vizinho de u")
         parVertices = input("u,v: ")
         parVertices = parVertices.split(",")
         u = parVertices[0]
