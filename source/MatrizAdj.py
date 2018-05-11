@@ -333,3 +333,7 @@ class MatrizAdj(object):
         '''
         for i in range(self.__nVertices - 1):
             self.__M[self.__nVertices - 1].append(0)
+
+    # Efetua conversão de tipo de estrutura
+    def _efetuaConversao(self, tipo_estrutura):
+        raise Exception("Ainda nao implementado!")  # Ainda não implementado

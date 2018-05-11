@@ -243,3 +243,7 @@ class MatrizInc(object):
         #     self.linhaM.append(0)
         self.__posicoes[str(u)] = self.__nVertices - 1
         self.__vertices[self.__nVertices - 1] = str(u)
+
+    # Efetua conversão de tipo de estrutura
+    def _efetuaConversao(self, tipo_estrutura):
+        raise Exception("Ainda nao implementado!")  # Ainda não implementado

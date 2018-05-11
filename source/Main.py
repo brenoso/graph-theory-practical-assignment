@@ -27,7 +27,8 @@ def print_menu_geral():
     print ("7. obtemSucessores")
     print ("8. obtemPredecessores")
     print ("9. Deletar um vertice")
-    print ("10. Sair\n")
+    print("10. Conversoes")
+    print ("11. Sair\n")
 
 # Variáveis auxiliares para os menus
 sair = False
@@ -44,7 +45,7 @@ while loop:
    
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
-    # for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
+    # for root, dirs, files in os.walk("C:/Users/PRPDELL/Desktop/Breno/projects/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -191,7 +192,59 @@ while loop and not sair:
         else:
             print("Vertice inexistente! Impossivel realizar operacao!")
 
-    elif escolha == 10: # Opção temporária
+    elif escolha == 10:
+
+        print (67 * "-")
+        print ("Escolha uma das opcoes para efetuar a conversao:")
+
+        # 1 - M.A. | 2 - M.I. | 3 - L.A.
+
+        if (tipo_estrutura == 1): #M.A.
+            print ("\n1.Converter a M.A. para L.A.")
+            print ("2.Converter a M.A. para M.I.")
+            u = input("\nDigite sua escolha [1-2]:")
+            u = int(u)
+
+            if (u != 1 and u != 2):
+                print("Opcao inexistente!")
+            else:
+                try:    
+                    grafo._efetuaConversao(u)
+                except Exception as e: 
+                    print(e)
+
+        elif (tipo_estrutura == 2): #M.I.
+            print ("\n1.Converter a M.I. para L.A.")
+            print ("2.Converter a M.I. para M.A.")
+            u = input("\nDigite sua escolha [1-2]:")
+            u = int(u)
+
+            if (u != 1 and u != 2):
+                print("Opcao inexistente!")
+            else:
+                try:    
+                    grafo._efetuaConversao(u)
+                except Exception as e: 
+                    print(e)
+
+        elif (tipo_estrutura == 3): #L.A.
+            print ("\n1.Converter a L.A. para M.A.")
+            print ("2.Converter a L.A. para M.I.")
+            u = input("\nDigite sua escolha [1-2]:")
+            u = int(u)
+
+            if (u != 1 and u != 2):
+                print("Opcao inexistente!")
+            else:
+                try:    
+                    grafo._efetuaConversao(u)
+                except Exception as e: 
+                    print(e)
+
+        else:
+            print("Impossivel realizar operacao!")
+
+    elif escolha == 11: # Opção temporária
         print ("Saindo...")
         sair = True
         loop = False

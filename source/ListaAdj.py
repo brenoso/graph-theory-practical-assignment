@@ -304,3 +304,7 @@ class ListaAdj(object):
             vertice = Vertice(u)
             self.__lista.append(vertice)
             self.__posicoes[str(u)] = self.__lista.index(vertice)
+
+    # Efetua conversão de tipo de estrutura
+    def _efetuaConversao(self, tipo_estrutura):
+        raise Exception("Ainda nao implementado!")  # Ainda não implementado
