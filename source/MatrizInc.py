@@ -114,6 +114,12 @@ class MatrizInc(object):
     Apenas para grafos direcionados.
     '''
     def _ehPredecessor(self,u,v):
+        
+        for aresta in self._obtemArestas():
+            if (aresta._obtemVerticeU() == v 
+             and aresta._obtemVerticeV() == u):
+                return True
+        
         return False # Ainda não implementado
 
     '''
@@ -155,6 +161,7 @@ class MatrizInc(object):
                 sucessores.append(self._obtemVertice(int(aresta._obtemAresta()[1])))
 
         return sucessores
+
     '''
     Recebe um vértice u como parâmetro e retorna
     o conjunto de predecessores desse vértice

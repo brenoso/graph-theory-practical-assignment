@@ -14,5 +14,11 @@ class Aresta (object):
     def _obtemAresta(self):
         return [self.__u, self.__v]
 
+    def _obtemVerticeU(self):
+        return self.__u
+    
+    def _obtemVerticeV(self):
+        return self.__v
+
     def _obtemPeso(self):
         return self.__peso
