@@ -136,8 +136,16 @@ class MatrizInc(object):
     Serão considerados sucessores todos os vizinhos do vértice.
     '''
     def _obtemSucessores(self,u):
-        return [] # Ainda não implementado - Chamar a função obtemVizinhos
 
+        sucessores = []
+
+        for vizinho in self._obtemVizinhos(u):
+            for aresta in self._obtemArestas():
+
+                if aresta._obtemAresta()[0] == u and aresta._obtemAresta()[1] == vizinho:
+                    sucessores.append(self._obtemVertice(int(vizinho)))
+
+        return sucessores
     '''
     Recebe um vértice u como parâmetro e retorna
     o conjunto de predecessores desse vértice
