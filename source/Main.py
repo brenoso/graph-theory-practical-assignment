@@ -143,7 +143,7 @@ while loop and not sair:
             print("\nAresta removida com sucesso!\n")
             print(grafo)
         else:
-            print ("\nAresta nao removida pois ja nao existia!")
+            print ("\nA aresta digitada nao existe!")
 
     elif escolha == 5:
 

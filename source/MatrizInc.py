@@ -104,9 +104,19 @@ class MatrizInc(object):
         # Caso pos_u == -1 ou pos_v == -1
         return False
 
-    # Remove a aresta (u,v) do grafo
+    # Remove uma aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
-        return False # Ainda não implementado
+
+        for index,aresta in enumerate(self._obtemArestas()):
+            if (aresta._obtemVerticeU() == u 
+             and aresta._obtemVerticeV() == v):
+            
+                self.__M.pop(index)
+                self.__nArestas = self.__nArestas - 1
+
+                return True
+
+        return False
     
     '''
     Recebe dois vértices u e v como parâmetros 
@@ -120,7 +130,7 @@ class MatrizInc(object):
              and aresta._obtemVerticeV() == u):
                 return True
         
-        return False # Ainda não implementado
+        return False
 
     '''
     Recebe dois vértices u e v como parâmetros 
