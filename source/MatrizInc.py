@@ -33,9 +33,9 @@ class MatrizInc(object):
         saida = "V = { "
         for v in self.__posicoes:
             saida += v + " "
-        saida += "}\n"
+        saida += "}\n\n"
 
-        saida += "Matriz de incidência\n"
+        saida += "Matriz de incidencia\n\n"
         for i in range(self.__nArestas):
             for j in range(self.__nVertices):
                 saida += str(self.__M[i][j]) + " "
@@ -61,7 +61,8 @@ class MatrizInc(object):
     Retorna os vizinhos do vertice u (retorna sua posicao 
     relativa na matriz)
     Em grafos direcionados serão considerados vizinhos apenas
-    os sucessores diretos do vértice
+    os sucessores diretos do vértice. (Será desconsiderada a relação
+    negativa entre os vértices nas arestas)
     '''
     def _obtemVizinhos(self, u):
 
@@ -72,7 +73,7 @@ class MatrizInc(object):
             lista = []
             for i in range(self.__nArestas):
                 for v in range(self.__nVertices):
-                    if(pos_u != v and self.__M[i][pos_u] != 0 and 
+                    if(pos_u != v and self.__M[i][pos_u] > 0 and 
                     self.__M[i][pos_u] != INF and self.__M[i][v] != 0 
                     and self.__M[i][v] != INF):
                         lista.append(self.__vertices[v])
@@ -82,11 +83,11 @@ class MatrizInc(object):
         else:
             return []
 
-
     '''
     Verifica se o vertice v é vizinho de u.
     Em grafos direcionados serão considerados vizinhos apenas
-    os sucessores diretos do vértice
+    os sucessores diretos do vértice. (Será desconsiderada a relação
+    negativa entre os vértices nas arestas)
     '''
     def _ehVizinho(self, u, v):
         # Obtenção da posição relativa do vértice u
@@ -96,7 +97,7 @@ class MatrizInc(object):
 
         if(pos_u >= 0 and pos_v >= 0):
             for i in range(self.__nArestas):
-                if(self.__M[i][pos_u] != 0 and self.__M[i][pos_u] != INF
+                if(self.__M[i][pos_u] > 0 and self.__M[i][pos_u] != INF
                   and self.__M[i][pos_v] != 0 and self.__M[i][pos_v] != INF):
                     return True
 
@@ -151,7 +152,7 @@ class MatrizInc(object):
     (Todos os vértices que apontam para u)
     Apenas para grafos direcionados.
     '''
-    def _obtemPredecessores(self,u):
+    def _obtemPredecessores(self,u):             
         return [] # Ainda não implementado
     
     '''
@@ -209,8 +210,12 @@ class MatrizInc(object):
             # Se u e v não são vizinhos, cria a ligação entre eles
             if(not(self._ehVizinho(u, v))):
                 self.__criaAresta(u, v, peso)
+
+                # No caso de grafos direcionados, modifica a ligação dos vértices
+                # na aresta para negativa, na posição contrária ao direcionamento da mesma.
                 if(self._direcionado == True):
                     self.__M[self.__nArestas][self._obtemPosicao(v)] = -1*self.__M[self.__nArestas][self._obtemPosicao(v)]
+                
                 # Aumenta o numero de arestas
                 self.__nArestas = self.__nArestas + 1 
     
@@ -231,7 +236,7 @@ class MatrizInc(object):
         # Obtenção da posição relativa do vértice v
         pos_v = self._obtemPosicao(v) 
         
-        # Ligação dos vértices u e v
+        # Ligação dos vértices u e v, feita na ida e na volta
         if(pos_u >= 0 and pos_v >= 0):
             self.__M[self.__nArestas][pos_u] = peso
             self.__M[self.__nArestas][pos_v] = peso

@@ -30,10 +30,10 @@ class ListaAdj(object):
         saida = "V = { "
         for v in self.__lista:
             saida += v._obtemNome() + " "
-        saida += "}\n"
+        saida += "}\n\n"
 
         # Impressão da lista de arestas
-        saida += "Vizinhanca dos vertices \n"
+        saida += "Vizinhanca dos vertices: \n\n"
         for v in self.__lista:
             saida += v._obtemNome() + ": "
             aux = v._obtemProximo()

@@ -34,9 +34,9 @@ class MatrizAdj(object):
         saida = "V = { "
         for v in self.__posicoes:
             saida += v + " "
-        saida += "}\n"
+        saida += "}\n\n"
 
-        saida += "Matriz de adjacencia\n"
+        saida += "Matriz de adjacencia: \n\n"
         for i in range(self.__nVertices):
             for j in range(self.__nVertices):
                 saida += str(self.__M[i][j]) + " "

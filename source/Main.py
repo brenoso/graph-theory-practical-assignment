@@ -18,15 +18,15 @@ def print_menu_estrutura_dados():
 def print_menu_geral():
     print ("\n" + 67 * "-")
     print ("\nSelecione a operacao para executar no grafo:\n")
-    print("1. Imprimir o grafo")
-    print ("2. ehVizinho")
-    print ("3. obtemVizinhos")
-    print ("4. Deletar uma Aresta")
-    print ("5. ehPredecessor")
-    print ("6. ehSucessor")
-    print ("7. obtemSucessores")
-    print ("8. obtemPredecessores")
-    print ("9. Deletar um vertice")
+    print("1.  Imprimir o grafo")
+    print ("2.  ehVizinho")
+    print ("3.  obtemVizinhos")
+    print ("4.  Deletar uma Aresta")
+    print ("5.  ehPredecessor")
+    print ("6.  ehSucessor")
+    print ("7.  obtemSucessores")
+    print ("8.  obtemPredecessores")
+    print ("9.  Deletar um vertice")
     print("10. Conversoes")
     print ("11. Sair\n")
 
@@ -45,7 +45,7 @@ while loop:
    
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
-    # for root, dirs, files in os.walk("C:/Users/PRPDELL/Desktop/Breno/projects/graph-theory-practical-assignment/instances"):
+    # for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -56,7 +56,7 @@ while loop:
                     break # Evita encontrar dois arquivos com o mesmo nome
     
     if path is None:
-        print("\nArquivo nao encontrado! Certifique de estar rodando o sistema a partir da pasta raiz!\n")
+        print("\nArquivo nao encontrado! Certifique de estar rodando o sistema a partir da pasta raiz 'source'!\n")
 
 # ---------------------- Menu de Estrutura de Dados ---------------------- #
 
