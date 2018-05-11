@@ -111,24 +111,44 @@ class ListaAdj(object):
     # Remove a aresta (u,v) do grafo
     def _deletaAresta(self, u, v):
 
-        for a in self._obtemArestas():
-            au = a._obtemAresta()[0]
-            av = a._obtemAresta()[1]
+        for aresta in self._obtemArestas():
+            
+            aresta_u = aresta._obtemAresta()[0]
+            aresta_v = aresta._obtemAresta()[1]
 
-            if au == u and av == v:
-                print('Encontrou: ' + str(self._obtemVertice(int(u))))
-                print('Encontrou: ' + str(self._obtemVertice(int(v))))
+            # Se existe a conexão
+            if aresta_u == u and aresta_v == v:
 
-                # Dando erro ao acessar self.__lista[pos_u] após a primeira remoção
-                # Tem que dar -- em alguma variavel q controla esse loop???
-                self.__lista.remove(self._obtemVertice(int(u)))
+                self.__removeAresta__(u, v)
+
+                # Caso não seja direcionado, também remove a ligação inversa
                 if not self._direcionado:
-                    self.__lista.remove(self._obtemVertice(int(v)))
+
+                    self.__removeAresta__(v, u)
 
                 return True
 
         return False
+    
+    # Função auxiliar de remoção de aresta
+    def __removeAresta__ (self,u,v):
 
+        vertice_v = self._obtemVertice(int(v))
+
+        proximo = self.__lista[int(u)]._obtemProximo()
+
+        # Verifica se o primeiro próximo é igual ao vertice v
+        if (proximo._obtemNome() == vertice_v._obtemNome()):
+            self.__lista[int(u)]._modificaProximo(proximo._obtemProximo())
+        else: 
+            while (proximo != None):
+                # Verifica se o próximo do próximo é igual ao vértice v
+                if (proximo._obtemProximo()._obtemNome() == vertice_v._obtemNome()):
+                    # O próximo passa a apontar para o próximo do próximo (deletou a aresta)
+                    proximo._modificaProximo(proximo._obtemProximo()._obtemProximo())
+                    break
+                else:
+                    proximo = proximo._obtemProximo()
 
     '''
     Recebe dois vértices u e v como parâmetros 
@@ -151,6 +171,7 @@ class ListaAdj(object):
             proximo = proximo._obtemProximo()
 
         return False
+
     '''
     Recebe dois vértices u e v como parâmetros 
     e retorna true se v é sucessor de u (u aponta pra v)
