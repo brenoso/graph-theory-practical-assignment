@@ -1,31 +1,39 @@
 # -*- coding: utf-8 -*-
+
 from Vertice import Vertice
 from Aresta import Aresta
 
-# Definição do nosso "INFINITO"
+# Representação de infinito
 INF = 1E8
 
-# Classe Grafo - Matriz de Adjacências
 class ListaAdj(object):
-    # Construtor da classe
+
+    '''
+    Construtor da classe
+    '''
     def __init__(self, direcionado):
+        
         # Lista de adjacencia de vertices (Membro privado da classe)
         self.__lista = [] 
+        
         # Numero de vertices (Membro privado da classe)
         self.__nVertices = 0 
-        '''
-        Dicionario que contem o nome do vertice como chave e 
-        como valor, sua posicao na lista
-        '''
+        
+        # Dicionario que contem o nome do vertice como chave e 
+        # como valor, sua posicao na lista
         self.__posicoes = {}
         self._direcionado = direcionado
 
-    # Destrutor da classe
+    '''
+    Destrutor da classe
+    '''
     def __del__(self):  
         for v in self.__lista:
             del v 
-
-    # Impressão da lista
+    
+    '''
+    Impressão da lista
+    '''
     def __str__(self):
         saida = "V = { "
         for v in self.__lista:
@@ -46,11 +54,15 @@ class ListaAdj(object):
             saida += "\n"
         return saida    
   
-    # Dada uma posição na lista, retorna o vértice correspondente
+    '''
+    Dada uma posição na lista, retorna o vértice correspondente
+    '''
     def _obtemVertice(self, pos):
         return self.__lista[pos]
-        
-    # Dado um vértice, retorna sua posição relativa na lista
+
+    '''   
+    Dado um vértice, retorna sua posição relativa na lista
+    '''
     def _obtemPosicao(self, v):
         try:
             return self.__posicoes[str(v)]
@@ -103,13 +115,13 @@ class ListaAdj(object):
             if(aux._obtemNome() == vertice_v): 
                 return True # Retorna True caso 'u' e 'v' sejam vizinhos
             aux = aux._obtemProximo() # Caso contrário vai para o próximo da lista
-        '''
-        Por fim, caso não encontremos 'v' na lista de 'u', 
-        retornamos False
-        '''
+        
+        # Caso não encontremos 'v' na lista de 'u', retorna False
         return False
     
-    # Remove a aresta (u,v) do grafo
+    '''
+    Remove a aresta (u,v) do grafo
+    '''
     def _deletaAresta(self, u, v):
 
         for aresta in self._obtemArestas():
@@ -120,19 +132,21 @@ class ListaAdj(object):
             # Se existe a conexão
             if aresta_u == u and aresta_v == v:
 
-                self.__removeAresta__(u, v)
+                self.__removeAresta(u, v)
 
                 # Caso não seja direcionado, também remove a ligação inversa
                 if not self._direcionado:
 
-                    self.__removeAresta__(v, u)
+                    self.__removeAresta(v, u)
 
                 return True
 
         return False
     
-    # Função auxiliar de remoção de aresta
-    def __removeAresta__ (self,u,v):
+    '''
+    Função auxiliar de remoção de aresta
+    '''
+    def __removeAresta (self,u,v):
 
         vertice_v = self._obtemVertice(int(v))
 
@@ -222,12 +236,14 @@ class ListaAdj(object):
     
     '''
     Deleta um vértice do grafo e as arestas 
-    indicentes a ele (por consequência)
+    incidentes a ele (por consequência)
     '''
     def _deletaVertice(self,u):
-        return False # Ainda não implementado
+        raise Exception("\nOperacao ainda nao implementada!")  # Ainda não implementado
 
-    # Esta funcao retorna a lista de arestas do grafo
+    '''
+    Retorna a lista de arestas do grafo
+    '''
     def _obtemArestas(self):
         # Lista de arestas
         listaArestas = []
@@ -245,9 +261,7 @@ class ListaAdj(object):
         return listaArestas
       
     '''
-    Nesta função, adicionamos um novo elemento ao grafo, que pode ser:
-    (a) Um único vértice
-    (b) Uma aresta (ou arco), valorada ao não
+    Adiciona um novo elemento ao grafo
     '''
     def _add(self, u, v = None, peso = 1):
         if(u == None):
@@ -294,17 +308,20 @@ class ListaAdj(object):
             prox = aux._obtemProximo()
             prox._modificaProximo(None)
 
-    # Criacao de um vertice para a lista
+    '''
+    Criacao de um vertice para a lista
+    '''
     def __criaVertice(self, u):
-        '''
-        Testa se o vértice u eh novo (ou seja: nao foi encontrado 
-        no grafo)
-        '''
+
+        # Verifica se o vértice u é novo (ou seja: nao foi encontrado 
+        # no grafo)
         if(self._obtemPosicao(u) == -1):
             vertice = Vertice(u)
             self.__lista.append(vertice)
             self.__posicoes[str(u)] = self.__lista.index(vertice)
 
-    # Efetua conversão de tipo de estrutura
+    '''
+    Efetua conversão de tipo de estrutura
+    '''
     def _efetuaConversao(self, tipo_estrutura):
-        raise Exception("Ainda nao implementado!")  # Ainda não implementado
+        raise Exception("\nOperacao ainda nao implementada!")  # Ainda não implementado

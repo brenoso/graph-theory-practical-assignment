@@ -1,35 +1,40 @@
 # -*- coding: utf-8 -*-
-#Importações
+
 from Aresta import Aresta
 from copy import deepcopy
 
-# Definição do nosso "INFINITO"
+# Representação de infinito
 INF = 1E8
 
 class MatrizAdj(object): 
-    # Construtor da classe
+
+    '''
+    Construtor da classe
+    '''
     def __init__(self, direcionado):
 
         # Representa a matriz
         self.__M = []
         self.__nVertices = 0 
-        '''
-        Representa o nome do vertice como chave, e como 
-        valor, a sua posicao na lista
-        '''
+        
+        # Representa o nome do vertice como chave, e como 
+        # valor, a sua posicao na lista
         self.__posicoes = {} 
-        '''
-        Representa a posicao do vertice na matriz como 
-        chave, e como valor, o seu nome
-        '''
+        
+        # Representa a posicao do vertice na matriz como 
+        # chave, e como valor, o seu nome
         self.__vertices = {}
         self._direcionado = direcionado
     
-    # Destrutor da classe
+    '''
+    Destrutor da classe
+    '''
     def __del__(self):  
         del self.__M
 
-    # Impressão da matriz de adjacência
+    '''
+    Impressão da matriz de adjacência
+    '''
     def __str__(self):
         saida = "V = { "
         for v in self.__posicoes:
@@ -44,12 +49,15 @@ class MatrizAdj(object):
         saida += "\n"
         return saida
 
-
-    # Retorna o vértice de determinada posição da matriz
+    '''
+    Retorna o vértice de determinada posição da matriz
+    '''
     def _obtemVertice(self, pos):
         return self.__vertices[pos]
 
-    # Dado um vértice, retorna sua posição relativa na matriz
+    '''
+    Dado um vértice, retorna sua posição relativa na matriz
+    '''
     def _getPosicao(self, u):
         try:
             return self.__posicoes[str(u)]
@@ -96,7 +104,9 @@ class MatrizAdj(object):
         # Caso pos_u == -1 ou pos_v == -1
         return False
 
-    # Deleta a aresta (u,v) do grafo
+    '''
+    Deleta a aresta (u,v) do grafo
+    '''
     def _deletaAresta(self, u, v):
         u = int(u)
         v = int(v)
@@ -111,11 +121,9 @@ class MatrizAdj(object):
             self.__M[u][v] = 0 # Remove a aresta            
         else:
             return False # Aresta não removida pois já não existia.
-
-        ''' 
-        Verifica se o grafo é direcionado. Caso não seja
-        deve remover a (u,v) e a (v,u) na matriz
-        '''
+ 
+        # Verifica se o grafo é direcionado. Caso não seja
+        # deve remover a (u,v) e a (v,u) na matriz
         if self._direcionado == True:
             return True # Retorna que a aresta (u,v) foi removida com sucesso
         else:
@@ -212,7 +220,7 @@ class MatrizAdj(object):
 
     '''
     Deleta um vértice do grafo e as arestas 
-    indicentes a ele (por consequência)
+    incidentes a ele (por consequência)
     '''
     def _deletaVertice(self,u):
 
@@ -235,19 +243,18 @@ class MatrizAdj(object):
                 self.__posicoes[key] = i
                 i = i + 1
 
-            '''
-            Como o dicionário de vértices é o inverso do dicionário de posições,
-            atualiza o dicionário de vértices com o inverso do dicionário de posições
-            atualizado
-            '''
+            
+            # Como o dicionário de vértices é o inverso do dicionário de posições,
+            # atualiza o dicionário de vértices com o inverso do dicionário de posições
+            # atualizado
             self.__vertices = {v: k for k, v in self.__posicoes.items()}
 
-            return True
-
         else:
-            return False
+            raise Exception("Vertice inexistente! Impossivel realizar operacao!")
 
-    # Esta funcao retorna a lista de arestas do grafo
+    '''
+    Retorna a lista de arestas do grafo
+    '''
     def _obtemArestas(self):
         listaArestas = []
         for pos_u in range(self.__nVertices):
@@ -261,9 +268,7 @@ class MatrizAdj(object):
         return listaArestas
       
     '''
-    Nesta função, adicionamos um novo elemento ao grafo, que pode ser:
-    (a) Um único vértice
-    (b) Uma aresta (ou arco), valorada ao não
+    Adiciona um novo elemento ao grafo
     '''
     def _add(self, u, v = None, peso = 1):
      
@@ -301,7 +306,9 @@ class MatrizAdj(object):
         if(pos_u >= 0 and pos_v >= 0):
             self.__M[pos_u][pos_v] = peso
     
-    # Criacao de um vertice para a matriz
+    '''
+    Criacao de um vertice para a matriz
+    '''
     def __criaVertice(self, u):
         self.__nVertices += 1
 
@@ -311,29 +318,26 @@ class MatrizAdj(object):
         
         self.__vertices[self.__nVertices - 1] = str(u)
 
-        '''
-        Retorna caso o número de vértices no grafo seja 1
-        pois não terá nenhuma ligação com outro vértice
-        '''
+        
+        # Retorna caso o número de vértices no grafo seja 1
+        # pois não terá nenhuma ligação com outro vértice
         if(self.__nVertices == 1):
             return
 
-        '''
-        Varre toda a matriz adicionando a cada linha (vértice do grafo)
-        mais uma coluna (que representa a ligação com o novo vértice)
-        inicialmente com o valor 0
-        '''
+        
+        # Varre toda a matriz adicionando a cada linha (vértice do grafo)
+        # mais uma coluna (que representa a ligação com o novo vértice)
+        # inicialmente com o valor 0
         for i in range(self.__nVertices - 1):
             self.__M[i].append(0)
 
-
-        '''
-        Cria as conexões (arestas) do novo vértice
-        preenchendo todas as suas colunas com o valor 0
-        '''
+        # Cria as conexões (arestas) do novo vértice
+        # preenchendo todas as suas colunas com o valor 0
         for i in range(self.__nVertices - 1):
             self.__M[self.__nVertices - 1].append(0)
 
-    # Efetua conversão de tipo de estrutura
+    '''
+    Efetua conversão de tipo de estrutura
+    '''
     def _efetuaConversao(self, tipo_estrutura):
-        raise Exception("Ainda nao implementado!")  # Ainda não implementado
+        raise Exception("\nOperacao ainda nao implementada!")  # Ainda não implementado

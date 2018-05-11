@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Importações
+
 from Grafo import Grafo
 import os
 
@@ -45,7 +45,6 @@ while loop:
    
     # Navega pela pasta a procura do arquivo
     for root, dirs, files in os.walk("../instances"):
-    #for root, dirs, files in os.walk("C:/Users/Breno/Google Drive/Disciplinas/2018-1/Grafos/Trabalho/graph-theory-practical-assignment/instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
                 if arquivo in file:
@@ -56,7 +55,7 @@ while loop:
                     break # Evita encontrar dois arquivos com o mesmo nome
     
     if path is None:
-        print("\nArquivo nao encontrado! Certifique de estar rodando o sistema a partir da pasta raiz 'source'!\n")
+        print("\nArquivo nao encontrado! Certifique-se de estar rodando o sistema a partir da pasta raiz 'source'!\n")
 
 # ---------------------- Menu de Estrutura de Dados ---------------------- #
 
@@ -200,11 +199,13 @@ while loop and not sair:
         print ("\nDigite o vertice que deseja remover")
         u = input("u:")
 
-        if (grafo._deletaVertice(u) == True):
+        try:
+            grafo._deletaVertice(u)
             print("\nVertice removido com sucesso!\n")
             print(grafo)
-        else:
-            print("Vertice inexistente! Impossivel realizar operacao!")
+
+        except Exception as e: 
+            print(e)
 
     elif escolha == 10:
 
@@ -258,7 +259,7 @@ while loop and not sair:
         else:
             print("Impossivel realizar operacao!")
 
-    elif escolha == 11: # Opção temporária
+    elif escolha == 11:
         print ("Saindo...")
         sair = True
         loop = False

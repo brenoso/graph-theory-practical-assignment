@@ -1,34 +1,42 @@
 # -*- coding: utf-8 -*-
 from Aresta import Aresta
 
-# Definição do nosso "INFINITO"
+# Representação de infinito
 INF = 1E8
 
 class MatrizInc(object): 
-    # Construtor da classe
+    
+    ''' 
+    Construtor da classe
+    '''
     def __init__(self, direcionado):
+
         self.__M = [] # Cria, inicialmente, uma matriz sem elementos
+
         # Numero de vertices (Membro privado da classe)
         self.__nVertices = 0
+
         # Numero de arestas (Membro privado da classe)
         self.__nArestas = 0 
-        '''
-        Dicionario que contem o nome do vertice como chave e 
-        como valor, sua posicao na lista
-        '''
+        
+        # Dicionario que contem o nome do vertice como chave e 
+        # como valor, sua posicao na lista
         self.__posicoes = {} 
-        '''
-        Dicionario que contem a posicao do vertice na matriz como chave 
-        e como valor, o nome do vertice
-        '''
+        
+        # Dicionario que contem a posicao do vertice na matriz como chave 
+        # e como valor, o nome do vertice
         self.__vertices = {}
         self._direcionado = direcionado
     
-    # Destrutor da classe
+    ''' 
+    Destrutor da classe
+    ''' 
     def __del__(self):  
         del self.__M
 
-    # Impressão da matriz de incidencia
+    ''' 
+    Impressão da matriz de incidencia
+    ''' 
     def __str__(self):
         saida = "V = { "
         for v in self.__posicoes:
@@ -50,7 +58,9 @@ class MatrizInc(object):
     def _obtemVertice(self, pos):
         return self.__vertices[pos]
 
-    # Dado um vértice, retorna sua posição relativa na matriz
+    ''' 
+    Dado um vértice, retorna sua posição relativa na matriz
+    ''' 
     def _obtemPosicao(self, u):
         try:
             return self.__posicoes[str(u)]
@@ -104,7 +114,9 @@ class MatrizInc(object):
         # Caso pos_u == -1 ou pos_v == -1
         return False
 
-    # Remove uma aresta (u,v) do grafo
+    ''' 
+    Remove uma aresta (u,v) do grafo
+    ''' 
     def _deletaAresta(self, u, v):
 
         for index,aresta in enumerate(self._obtemArestas()):
@@ -191,13 +203,14 @@ class MatrizInc(object):
     
     '''
     Deleta um vértice do grafo e as arestas 
-    indicentes a ele (por consequência)
+    incidentes a ele (por consequência)
     '''
-    def _deletaVertice(self,u):
-        return False # Ainda não implementado
+    def _deletaVertice(self,u):        
+        raise Exception("\nOperacao ainda nao implementada!")  # Ainda não implementado
 
-
-    # Esta funcao retorna a lista de arestas do grafo
+    ''' 
+    Retorna a lista de arestas do grafo
+    ''' 
     def _obtemArestas(self):
         listaArestas = []
         for i in range(self.__nArestas):
@@ -224,9 +237,7 @@ class MatrizInc(object):
         return listaArestas
 
     '''
-    Nesta função, adicionamos um novo elemento ao grafo, que pode ser:
-    (a) Um único vértice
-    (b) Uma aresta (ou arco), valorada ao não
+    Adiciona um novo elemento ao grafo
     '''
     def _add(self, u, v = None, peso = 1):
         if(u == None):
@@ -275,7 +286,9 @@ class MatrizInc(object):
             self.__M[self.__nArestas][pos_u] = peso
             self.__M[self.__nArestas][pos_v] = peso
     
-    # Criacao de um vertice para a matriz
+    ''' 
+    Criacao de um vertice para a matriz
+    ''' 
     def __criaVertice(self, u):            
         self.__nVertices += 1
         # for linhaM in self.__M:
@@ -283,6 +296,8 @@ class MatrizInc(object):
         self.__posicoes[str(u)] = self.__nVertices - 1
         self.__vertices[self.__nVertices - 1] = str(u)
 
-    # Efetua conversão de tipo de estrutura
+    ''' 
+    Efetua conversão de tipo de estrutura
+    ''' 
     def _efetuaConversao(self, tipo_estrutura):
-        raise Exception("Ainda nao implementado!")  # Ainda não implementado
+        raise Exception("\nOperacao ainda nao implementada!")  # Ainda não implementado

@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
+
 class Aresta (object):
-    # Construtor da classe
+
+    '''
+    Construtor da classe
+    '''
     def __init__(self, u, v, peso = 1):
         self.__u = str(u)
         self.__v = str(v)
         self.__peso = peso
-        
-    # Imprime a aresta
+
+    '''   
+    Imprime a aresta
+    '''
     def __str__(self):
         return " (" + str(self.__u) + ", " + str(self.__v) + ")(" + str(self.__peso) + ") "
     
-    # Obtem vertices da aresta (retorna uma lista com o par ordenado de vértices)
+    '''
+    Retorna uma lista com o par ordenado de vértices que compõem a aresta
+    '''
     def _obtemAresta(self):
         return [self.__u, self.__v]
 
