@@ -9,15 +9,15 @@ def print_menu_arquivo():
 
 def print_menu_estrutura_dados():
     print (67 * "-")
-    print ("Escolha uma Estrutura de Dados para representar o grafo")
+    print ("\nEscolha uma Estrutura de Dados para representar o grafo\n")
     print ("1. M.A.")
     print ("2. M.I.")
     print ("3. L.A.")
     print ("4. Sair\n")
 
 def print_menu_geral():
-    print (67 * "-")
-    print ("\nSelecione a operacao para executar no grafo:")
+    print ("\n" + 67 * "-")
+    print ("\nSelecione a operacao para executar no grafo:\n")
     print("1. Imprimir o grafo")
     print ("2. ehVizinho")
     print ("3. obtemVizinhos")
@@ -107,26 +107,32 @@ while loop and not sair:
     escolha = int(escolha)
 
     if escolha == 1:
+
         print("\n")     
         print (grafo)
 
-    elif escolha == 2:     
+    elif escolha == 2:
+
+        print ("\n" + 67 * "-")
         print ("\nDigite os vertices u,v para verificar se o vertice v eh vizinho de u")
+
         parVertices = input("u,v: ")
         parVertices = parVertices.split(",")
         u = parVertices[0]
         v = parVertices[1]
         print(grafo._ehVizinho(u,v))
-        print("\n")
 
     elif escolha == 3:
+        print ("\n" + 67 * "-")
         print ("\nDigite um vertice para verificar seus vizinhos")
         vertice = input("u: ")
         print(grafo._obtemVizinhos(vertice))
-        print("\n")
     
     elif escolha == 4:
+
+        print ("\n" + 67 * "-")
         print ("\nDigite a aresta que deseja remover")
+
         aresta = input("u,v: ")
         aresta = aresta.split(",")
         u = aresta[0]
@@ -140,6 +146,9 @@ while loop and not sair:
             print ("\nAresta nao removida pois ja nao existia!")
 
     elif escolha == 5:
+
+        print ("\n" + 67 * "-")
+
         if grafo._direcionado == False:
             print ("Grafo nao direcionado. Impossivel realizar operacao!")
         else:
@@ -149,9 +158,11 @@ while loop and not sair:
             u = vertices[0]
             v = vertices[1]
             print(grafo._ehPredecessor(u,v))
-            print("\n")
 
     elif escolha == 6:
+
+        print ("\n" + 67 * "-")
+
         if grafo._direcionado == False:
             print ("Grafo nao direcionado. Impossivel realizar operacao!")
         else:
@@ -161,28 +172,31 @@ while loop and not sair:
             u = vertices[0]
             v = vertices[1]
             print(grafo._ehSucessor(u,v))
-            print("\n")
 
     elif escolha == 7:
+
+        print ("\n" + 67 * "-")
+
         if grafo._direcionado == False:
             print ("Grafo nao direcionado. Impossivel realizar operacao!")
         else:
             print ("\nDigite um vertice u para obter o conjunto de sucessores desse vertice")
             u = input("u: ")
             print(grafo._obtemSucessores(u))
-            print("\n")
 
     elif escolha == 8:
+
+        print ("\n" + 67 * "-")
         if grafo._direcionado == False:
             print ("Grafo nao direcionado. Impossivel realizar operacao!")
         else:
             print ("\nDigite um vertice u para obter o conjunto de predecessores desse vertice")
             u = input("u: ")
             print(grafo._obtemPredecessores(u))
-            print("\n")
 
     elif escolha == 9:
-        
+
+        print ("\n" + 67 * "-")
         print ("\nDigite o vertice que deseja remover")
         u = input("u:")
 
@@ -194,8 +208,8 @@ while loop and not sair:
 
     elif escolha == 10:
 
-        print (67 * "-")
-        print ("Escolha uma das opcoes para efetuar a conversao:")
+        print ("\n" + 67 * "-")
+        print ("\nEscolha uma das opcoes para efetuar a conversao:")
 
         # 1 - M.A. | 2 - M.I. | 3 - L.A.
 
