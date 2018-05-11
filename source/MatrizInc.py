@@ -125,8 +125,17 @@ class MatrizInc(object):
     def _ehSucessor(self,u,v):
 
         for i in range(self.__nArestas):
+            
+            # Verifica existencia dos vértices
+            try:
+                self.__M[i][int(u)]
+                self.__M[i][int(v)]
+            except:
+                return False
+
             if (self.__M[i][int(u)] and self.__M[i][int(v)] < 0) and self._direcionado:
                 return True
+
         return False
 
 
