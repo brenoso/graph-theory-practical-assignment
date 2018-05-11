@@ -139,11 +139,9 @@ class MatrizInc(object):
 
         sucessores = []
 
-        for vizinho in self._obtemVizinhos(u):
-            for aresta in self._obtemArestas():
-
-                if aresta._obtemAresta()[0] == u and aresta._obtemAresta()[1] == vizinho:
-                    sucessores.append(self._obtemVertice(int(vizinho)))
+        for aresta in self._obtemArestas():
+            if aresta._obtemAresta()[0] == u:
+                sucessores.append(self._obtemVertice(int(aresta._obtemAresta()[1])))
 
         return sucessores
     '''
