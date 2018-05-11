@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Vertice import Vertice
 from Aresta import Aresta
 

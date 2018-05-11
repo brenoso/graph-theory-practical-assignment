@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #Importações
 from ListaAdj import ListaAdj
 from MatrizAdj import MatrizAdj

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Aresta (object):
     # Construtor da classe
     def __init__(self, u, v, peso = 1):

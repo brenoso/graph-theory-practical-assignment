@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #Importações
 from Aresta import Aresta
 from copy import deepcopy
@@ -192,17 +193,20 @@ class MatrizAdj(object):
         
         u = int(u)
         predecessores = []
+        posicao_u = self._getPosicao(u)
 
-        # Verifica a existencia do vértice
-        try:
-            self.__M[u][0]
-        except:
-            return []
+        if (posicao_u >= 0):
 
-        # Verifica para cada vértice, se ele é predecessor do vértice u
-        for i in range(self.__nVertices):
-            if self.__M[i][u] != 0 and self.__M[i][u] != INF:
-                predecessores.append(self.__vertices[i])
+            # Verifica a existencia do vértice
+            try:
+                self.__M[posicao_u][0]
+            except:
+                return []
+
+            # Verifica para cada vértice, se ele é predecessor do vértice u
+            for i in range(self.__nVertices):
+                if self.__M[i][posicao_u] != 0 and self.__M[i][posicao_u] != INF:
+                    predecessores.append(self.__vertices[i])
 
         return predecessores
 
@@ -221,7 +225,7 @@ class MatrizAdj(object):
             self.__M.remove(self.__M[self.__posicoes[str(u)]])
             deleted_column = [i.pop(self.__posicoes[str(u)]) for i in self.__M]
             self.__nVertices = self.__nVertices - 1
-            
+
             # Remove o vértice do dicionário de posições
             del self.__posicoes[str(u)]
 

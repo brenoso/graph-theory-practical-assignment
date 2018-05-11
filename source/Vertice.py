@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import networkx as nx # Biblioteca utilizada para a impressão do grafo
 import matplotlib.pyplot as plt
 
