@@ -169,7 +169,15 @@ class MatrizInc(object):
     Apenas para grafos direcionados.
     '''
     def _obtemPredecessores(self,u):             
-        return [] # Ainda não implementado
+        
+        predecessores = []
+
+        for aresta in self._obtemArestas():
+            if (aresta._obtemVerticeV() == u):
+                vertice = aresta._obtemVerticeU()
+                predecessores.append(vertice)
+
+        return predecessores
     
     '''
     Deleta um vértice do grafo e as arestas 
