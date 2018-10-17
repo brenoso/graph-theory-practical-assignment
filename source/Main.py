@@ -40,7 +40,7 @@ loop=True
   
 while loop:
     print_menu_arquivo()
-    arquivo = input()
+    arquivo = raw_input()
     path = None
    
     # Navega pela pasta a procura do arquivo
